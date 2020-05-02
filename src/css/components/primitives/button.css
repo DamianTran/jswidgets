@@ -1,0 +1,34 @@
+.jsw-button {
+    padding: 14px 36px;
+    min-width: 128px;
+    font-size: 16px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--themeMain);
+    border: none;
+    border-bottom: 4px solid rgb(125,92,0);
+    border-radius: 8px;
+    color: white;
+
+    transition: filter 0.2s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.jsw-button:last-child {
+    margin-right: 0;
+}
+
+.jsw-button:hover {
+    filter: brightness(108%);
+}
+
+.jsw-button:active {
+    filter: brightness(80%);
+}
+
+.jsw-button.inactive {
+    pointer-events: none;
+    opacity: 0.5;
+}

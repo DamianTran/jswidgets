@@ -1,0 +1,81 @@
+html, body {
+    &.jsw-scroll-controlled {
+        overflow-y: hidden;
+    }
+}
+
+.jsw-splash-card-placeholder {
+
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    transition: height 1.2s ease-in-out;
+
+    &.scrolled {
+        height: 0;
+    }
+
+}
+
+.jsw-splash-card {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    z-index: 110;
+
+    transition: transform 1.2s ease-in-out;
+
+    &.scrolled {
+        transform: translateY(-100%);
+    }
+
+    .jsw-splash-card-container {
+
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .jsw-splash-main {
+
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+
+            img {
+                width: 314px;
+                height: 314px;
+                object-fit: contain;
+            }
+
+            .jsw-splash-header {
+                font-size: 32px;
+                letter-spacing: 3px;
+                font-weight: 200;
+                margin-top: 26px;
+            }
+
+            .jsw-splash-message {
+                font-size: 24px;
+                letter-spacing: 2px;
+                line-height: 36px;
+                font-weight: 100;
+            }
+
+        }
+
+    }
+
+}

@@ -1,0 +1,71 @@
+.jsw-radio {
+    width: 256px;
+
+    & > h3 {
+        font-size: 18px;
+        border-bottom: 1px solid rgb(200,200,200);
+        margin: 10px 0 18px 0;
+        padding-bottom: 4px;
+    }
+
+    .jsw-radio-item {
+        width: 100%;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        label {
+            margin: 0 24px 0 0;
+            font-size: 16px;
+        }
+
+        button {
+            width: 22px;
+            height: 22px;
+            border-radius: 22px;
+            border: 2px solid rgb(160,160,160);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            position: relative;
+            box-sizing: border-box;
+            cursor: pointer;
+            
+            transition: border 0.2s, filter 0.15s;
+
+            &:hover {
+                border-color: rgb(40,220,40);
+
+                &::after {
+                    opacity: 0.4;
+                    background-color: rgb(40,220,40);
+                }
+            }
+
+            &::after {
+                width: 10px;
+                height: 10px;
+                border-radius: 10px;
+                position: absolute;
+                content: "";
+                left: 4px;
+                top: 4px;
+                background-color: rgb(160,160,160);
+                opacity: 0;
+        
+                transition: opacity 0.2s, background-color 0.2s;
+            }
+        }
+
+        &.selected button::after{
+            opacity: 1;
+        }
+
+        button:active {
+            filter: brightness(80%);
+        }
+    }
+
+}

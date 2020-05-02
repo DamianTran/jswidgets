@@ -1,0 +1,51 @@
+.jsw-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 256px;
+
+    .jsw-toggle-button {
+        position: relative;
+        width: 52px;
+        height: 28px;
+        margin: 4px 0;
+        border-radius: 42px;
+        padding: 4px;
+        background-color: rgb(220,220,220);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+
+        transition: background-color 0.35s ease-in-out;
+
+        :hover .jsw-toggle-knob{
+            filter: brightness(115%);
+        }
+    }
+
+    .jsw-toggle-knob {
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        background-color: white;
+
+        transition: background-color 0.2s, transform 0.2s, filter 0.2s;
+    }
+
+    &.on {
+        .jsw-toggle-button {
+            background-color: var(--themeMain);
+        }
+
+        .jsw-toggle-knob{
+            transform: translateX(115%);
+        }
+    }
+
+    label {
+        margin: 0 24px 0 0;
+        font-size: 16px;
+    }
+
+}
