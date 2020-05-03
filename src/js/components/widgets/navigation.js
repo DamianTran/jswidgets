@@ -2,6 +2,11 @@ import styles from "../../../css/components/widgets/navigation.scss";
 
 import ClickZone from "../primitives/clickzone";
 
+import {
+    jswFirstVisit,
+    jswNumVisits
+} from "../../utils/localStorage";
+
 class HamburgerMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -70,7 +75,7 @@ class HamburgerMenu extends React.Component {
                     {this.props.children}
                 </div>
             ]
-        )
+        );
 
     }
 }
@@ -92,6 +97,28 @@ class NavigationButton extends React.Component {
                 <button className="jsw-navigation-button" type="button">{label}</button>
             </a>
         )
+    }
+}
+
+class NavigationLogo extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            href: props.href ? props.href : ".",
+            image: props.image ? props.image : ""
+        };
+    }
+
+    render() {
+
+        const { href, image } = this.state;
+
+        return(
+            <a className="jsw-navigation-logo" href={href}>
+                <img src={image} alt="Navigation logo" />
+            </a>
+        );
     }
 }
 
@@ -173,6 +200,7 @@ export default class Navigation extends ClickZone {
 export { 
     Navigation, 
     NavigationButton,
+    NavigationLogo,
     NavigationGroup,
     HamburgerMenu
 };

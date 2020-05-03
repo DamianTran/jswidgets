@@ -1,7 +1,6 @@
 html, body {
     margin: 0;
     box-sizing: border-box;
-    padding: 24px;
     overflow-x: hidden;
 }
 
@@ -12,7 +11,7 @@ div {
 
 h1, h2, h3, h4, h5, p, button, a,
 textarea, input, label, div {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Proxima Nova', Arial, Helvetica, sans-serif;
 }
 
 h1, h2 {
@@ -22,3 +21,17 @@ h1, h2 {
 h3, h4, h5 {
     letter-spacing: 1px;
 }
+
+.example-parallax {
+
+    @at-root p#{&} {
+        color: white;
+        font-size: 50px;
+        letter-spacing: 3px;
+        font-weight: 0;
+    }
+
+}
+
+
+

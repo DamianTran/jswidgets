@@ -21,27 +21,50 @@
         z-index: 101;
         display: flex;
         align-items: center;
-        justify-content: space-between;
         box-shadow: 0 4px 6px 0 rgba(0,0,0,0.25);
 
         background-color: var(--themeNavigation);
 
         transition: transform 0.35s ease-in-out, height 0.35s;
 
-        .static {
+        &.static {
             position: absolute;
         }
 
-        .hidden {
+        &.hidden {
             transform: translateY(-100%);
+
+            .jsw-hamburger-button.open {
+                transform: translateY(200%);
+            }
+
+            .jsw-hamburger-menu.open {
+                padding-top: 148px;
+            }
         }
 
-        .grow {
+        &.grow {
             height: 84px;
         }
 
-        .shrink {
+        &.shrink {
             height: 48px;
+        }
+
+        .jsw-navigation-logo {
+            height: 38px;
+            margin-right: 22px;
+            cursor: pointer;
+            transition: filter 0.25s;
+
+            img {
+                height: 100%;
+                width: auto;
+            }
+
+            &:hover {
+                filter: brightness(115%);
+            }
         }
 
         & > .jsw-navigation-group {
@@ -115,18 +138,18 @@
         left: 0;
         top: 0;
         width: 100vw;
-        height: 100vh;
-        padding: 84px 48px;
+        height: calc(100vh + 84px);
+        padding: 84px 48px 168px 48px;
         background-color: rgba(0,0,0,0.6);
 
-        transition: transform 0.35s ease-in-out 0.2s, opacity 0.3s ease-in-out 0.1s;
+        transition: transform 0.35s ease-in-out 0.2s, opacity 0.3s ease-in-out 0.1s, padding 0.25s;
 
         &.open {
             transform: scale(1,1);
             opacity: 1;
             pointer-events: all;
     
-            transition: transform 0.15s ease-in-out, opacity 0.3s ease-in-out;
+            transition: transform 0.15s ease-in-out, opacity 0.3s ease-in-out, padding 0.25s;
         }
 
         .jsw-navigation-group {
@@ -180,8 +203,9 @@
         cursor: pointer;
         position: relative;
         z-index: 106;
+        margin-left: auto;
 
-        transition: filter 0.25s;
+        transition: filter 0.25s, transform 0.25s;
 
         &:hover {
             filter: brightness(120%);
@@ -348,22 +372,18 @@
         position: relative;
     }
 
-    @media screen and (min-aspect-ratio: 10/9) {
+    .jsw-navigation-bar >
+    .jsw-navigation-group
+    .jsw-navigation-button {
+        height: 100%;
+        padding: 0 18px;
+        min-width: 84px;
 
-        .jsw-navigation-bar >
-        .jsw-navigation-group
-        .jsw-navigation-button {
-            height: 100%;
-            padding: 0 18px;
-            min-width: 84px;
+        transition: filter 0.3s ease-in-out;
 
-            transition: filter 0.3s ease-in-out;
-
-            &:hover {
-                filter: brightness(120%);
-            }
+        &:hover {
+            filter: brightness(120%);
         }
-
     }
 
     @media screen and (max-aspect-ratio: 10/9) {

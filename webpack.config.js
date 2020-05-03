@@ -2,6 +2,10 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
+    entry: {
+        'jswidgets': "./src/index.js",
+        'examplehome': "./src/example/js/pages/home.js"
+    },
     module: {
         rules: [
             {
@@ -30,20 +34,22 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|gif|ico)$/,
                 use: [
-                    'file-loader?name=[name].[ext]'
+                    'file-loader?name=assets/images/[name].[ext]'
                 ]
             }
         ]
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: './src/index.html',
+            chunks: ['examplehome'],
+            template: './src/example/index.html',
             filename: './index.html'
         }),
         new webpack.ProvidePlugin({
             "$": 'jquery',
             'React': 'react',
-            'ReactDOM': 'react-dom'
+            'ReactDOM': 'react-dom',
+            'css' : 'emotion'
         })
     ]
 };

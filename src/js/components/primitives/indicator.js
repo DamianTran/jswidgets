@@ -1,5 +1,8 @@
 import styles from "../../../css/components/primitives/indicator.scss";
 
+/** @jsx jsx */
+import { css, jsx } from "@emotion/core";
+
 export default class Indicator extends React.Component {
 
     constructor(props) {
@@ -24,7 +27,7 @@ export default class Indicator extends React.Component {
         const { active, label } = this.state;
 
         if(label) {
-            var labelDOM = <label>{label}</label>;
+            var labelDOM = <label style={this.props.style}>{label}</label>;
         } else {
             var labelDOM = null;
         }
@@ -32,7 +35,7 @@ export default class Indicator extends React.Component {
         return(
             <button className={`jsw-indicator${ active ? " active" : ""}`}>
                 {labelDOM}
-                <div className="jsw-chevron"></div>
+                <div className="jsw-chevron" css={this.props.arrowStyle}></div>
             </button>
         );
 

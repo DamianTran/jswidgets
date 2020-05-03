@@ -4,6 +4,10 @@ html, body {
     }
 }
 
+.jsw-splash-sequence {
+    z-index: 110;
+}
+
 .jsw-splash-card-placeholder {
 
     position: relative;
@@ -33,6 +37,10 @@ html, body {
 
     &.scrolled {
         transform: translateY(-100%);
+    }
+
+    &.pending {
+        transform: translateY(100%);
     }
 
     .jsw-splash-card-container {

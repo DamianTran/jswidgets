@@ -30,7 +30,7 @@ export default class Collapsable extends React.Component {
         } = this.state;
 
         return(
-            <div className={`jsw-collapsable${ open ? " open" : ""}`}>
+            <div className={`jsw-collapsable${ open ? " open" : ""}`} style={this.props.style}>
                 <div className="jsw-collapsable-header">
                     <label htmlFor={this.labelid}>{this.state.title}</label>
                     <button 
