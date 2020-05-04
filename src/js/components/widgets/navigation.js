@@ -100,6 +100,38 @@ class NavigationButton extends React.Component {
     }
 }
 
+class NavigationDropdown extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            label: props.label
+        };
+
+        this.ref = React.createRef();
+    }
+
+    render() {
+        return(
+            <button className="jsw-navigation-button" type="button">
+                <p>{this.state.label}</p>
+                <div class="jsw-arrow"></div>
+                <Dropdown ref={this.ref} style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '0',
+                    width: '200%',
+                    borderRadius: '0 12px 12px 12px',
+                    backgroundColor: 'var(--themeNavigation)'
+                }}>
+                    {this.props.children}
+                </Dropdown>
+            </button>
+        )
+
+    }
+}
+
 class NavigationLogo extends React.Component {
     constructor(props) {
         super(props);

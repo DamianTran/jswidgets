@@ -32,6 +32,7 @@ export default class Parallax extends React.Component {
         }
 
         this.ref = React.createRef();
+        this.container = React.createRef();
     }
 
     render() {
@@ -53,29 +54,29 @@ export default class Parallax extends React.Component {
         let newHeight = 100 * (1 + scaleY);
 
         return(
-            <div className="jsw-parallax-container" style={this.props.style}>
+            <div className="jsw-parallax-container" style={this.props.style} ref={this.container}>
                 <div className="jsw-child-container">
                     {this.props.children}
                 </div>
                 <div className="jsw-parallax-wrapper" ref={this.ref}>
                     <img className="jsw-parallax-image" src={image} alt="Parallax image"
-                    style={{
+                    style={{...this.props.parallaxStyle, ...{
                         transform: `translate(${totalOffsetX}px, ${totalOffsetY}px)`,
                         width: `${newWidth}%`,
                         height: `${newHeight}%`,
                         left: `${(100 - newWidth)/2}%`,
                         top: `${(100 - newHeight)/2}%`
-                    }}/>
+                    }}}/>
                 </div>
             </div>
         );
 
     }
 
-    handleScroll = event => {
+    handleScroll = () => {
 
-        let newY = $(window).scrollTop();
-        let newX = $(window).scrollLeft();
+        let newY = this.scrollView.scrollTop();
+        let newX = this.scrollView.scrollLeft();
 
         let $img = $(this.ref.current);
 
@@ -89,12 +90,22 @@ export default class Parallax extends React.Component {
     }
 
     componentDidMount() {
-        $(window)
+
+        let $closest = $(this.container.current)
+                            .closest(".jsw-scroll-view");
+
+        if($closest.length) {
+            this.scrollView = $closest.eq(0);
+        } else {
+            this.scrollView = $(window);
+        }
+
+        this.scrollView
             .scroll(this.handleScroll);
     }
 
     componentWillUnmount() {
-        $(window)
+        this.scrollView
             .unbind('scroll', this.handleScroll);
     }
 

@@ -1,8 +1,8 @@
-import styles from "../../../css/components/widgets/dropdown.scss";
+import styles from "../../../css/components/widgets/select.scss";
 
 import ClickZone from "../primitives/clickzone";
 
-class DropdownItem extends React.Component {
+class SelectorItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,14 +16,14 @@ class DropdownItem extends React.Component {
     render() {
         const { value } = this.state;
         return(
-            <div className='jsw-dropdown-item' value={value} ref={this.ref} onClick={() => {this.onSelect(value)}}>{value}</div>
+            <div className='jsw-selector-item' value={value} ref={this.ref} onClick={() => {this.onSelect(value)}}>{value}</div>
         )
     }
 }
 
 var JSDropdownUID = 0;
 
-export default class Dropdown extends ClickZone {
+export default class Selector extends ClickZone {
     constructor(props) {
         super(props);
         this.extendState({
@@ -35,7 +35,7 @@ export default class Dropdown extends ClickZone {
             label: props.label
         });
         this.buttonType = props.buttonType ? props.buttonType : "chevron";
-        this.labelid = "jsw-dropdown-" + JSDropdownUID;
+        this.labelid = "jsw-selector-" + JSDropdownUID;
         ++JSDropdownUID;
     }
 
@@ -78,7 +78,7 @@ export default class Dropdown extends ClickZone {
         if(content) {
             for(const item of content) {
                 if(showAll || !value || regex.test(item)) {
-                    items.push(<DropdownItem key={item} value={item} onSelect={this.selectItem}/>);
+                    items.push(<SelectorItem key={item} value={item} onSelect={this.selectItem}/>);
                 }
             }
         }
@@ -118,10 +118,10 @@ export default class Dropdown extends ClickZone {
 
         return(
             <div 
-                className={`jsw-dropdown${ open && clicked ? " open" : "" }`} 
+                className={`jsw-selector${ open && clicked ? " open" : "" }`} 
                 ref={node => this.node = node}>
                 {labelDOM}
-                <div className="jsw-dropdown-main">
+                <div className="jsw-selector-main">
                     <input 
                         type="text" 
                         onChange={this.onType} 
@@ -129,11 +129,11 @@ export default class Dropdown extends ClickZone {
                         value={value}
                         ref={input => this.input = input}></input>
                     <button 
-                        type="button" className="jsw-dropdown-button" onClick={this.buttonToggle}
+                        type="button" className="jsw-selector-button" onClick={this.buttonToggle}
                         id={this.labelid}>
                     {buttonDOM}
                     </button>
-                    <div className="jsw-dropdown-list">
+                    <div className="jsw-selector-list">
                         {this.fill(content)}
                     </div>
                 </div>

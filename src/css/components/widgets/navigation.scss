@@ -47,7 +47,7 @@
             height: 84px;
         }
 
-        &.shrink {
+        &.shrink:not(:hover) {
             height: 48px;
         }
 

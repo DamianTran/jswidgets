@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     box-sizing: border-box;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 div {
@@ -24,11 +25,49 @@ h3, h4, h5 {
 
 .example-parallax {
 
-    @at-root p#{&} {
-        color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 32px;
+    color: white;
+
+    h1 {
         font-size: 50px;
         letter-spacing: 3px;
         font-weight: 0;
+        margin: 0 0 24px 0;
+        max-width: 60%;
+        font-weight: 200;
+    }
+
+    h3 {
+        font-size: 28px;
+        letter-spacing: 3px;
+        font-weight: 0;
+        margin: 0;
+        line-height: 38px;
+        max-width: 80%;
+        font-weight: 200;
+    }
+
+    img {
+        width: 312px;
+        height: 312px;
+        object-fit: contain;
+        opacity: 0.82;
+    }
+
+}
+
+.jsw-example {
+
+    &.jsw-splash {
+        @at-root i#{&} {
+            font-size: 132px;
+            color: var(--themeMain);
+            margin: 32px 0;
+        }
     }
 
 }

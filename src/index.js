@@ -9,10 +9,14 @@ import Indicator from "./js/components/primitives/indicator";
 import Collapsable from "./js/components/containers/collapsable";
 import Form from "./js/components/containers/form";
 import Parallax from "./js/components/containers/parallax";
+import { 
+    ScrollFade,
+    TimedFade
+} from "./js/components/containers/fade";
 
 /* Widgets */
 
-import Dropdown from "./js/components/widgets/dropdown";
+import Selector from "./js/components/widgets/selector";
 import Toggle from "./js/components/widgets/toggle";
 import Radio from "./js/components/widgets/radio";
 import { 
@@ -33,8 +37,10 @@ import {
  export {
      Collapsable,
      Form,
-     Dropdown,
+     Selector,
      Parallax,
+     ScrollFade,
+     TimedFade,
      Toggle,
      Radio,
      Navigation,

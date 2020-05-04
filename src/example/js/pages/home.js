@@ -1,21 +1,16 @@
 /* Example app */
 
 import {
-    Collapsable,
-    Form,
-    Dropdown,
     Parallax,
-    Toggle,
-    Radio,
-    Navigation,
-    NavigationButton,
-    NavigationGroup,
-    NavigationLogo,
-    HamburgerMenu,
     SplashCenter,
     SplashCard,
-    SplashSequence
+    SplashSequence,
+    ScrollFade,
+    TimedFade
 } from "../../..";
+
+import ExampleNavigation from "../components/navigation";
+import ExampleForm from "../components/form";
 
 import custom_styles from "../../css/styles.scss";
 
@@ -23,8 +18,62 @@ import mainLogo from "../../assets/images/jsw-logo.png";
 import mainLogoWhite from "../../assets/images/jsw-logo-white.png";
 import splashImage2 from "../../assets/images/jsw-bricks.png";
 import landscapeImage from "../../assets/images/landscape.jpg";
+import starryImage from "../../assets/images/milkyway.jpg";
 
 import favicon from "../../assets/images/favicon.ico";
+
+const ExampleSplash = () => {
+    return(
+        <SplashSequence>
+            <SplashCard wait={1800} animLength={2000} first>
+                <SplashCenter image={mainLogo} title="JSWidgets" message="An extensive component library for ReactJS.  Do more in less time with JSWidgets." />
+            </SplashCard>
+            <SplashCard wait={1500} animLength={1200} style={{
+                backgroundColor: 'rgb(255,170,0)'
+            }} indicatorColor='white' first>
+                <SplashCenter image={splashImage2} title="A building block system with high level components." message="JSWidgets lets you repeat, nest, and copy modular widgets with ease.  It just works!"
+                style={{ color: 'white' }} />
+            </SplashCard>
+            <SplashCard wait={1500} animLength={1200} first>
+                <SplashCenter title="A more Reactive toolkit" message="Continue on to see more examples of how JSWidgets can be readily incorporated with your site.">
+                    <i className='jsw-example jsw-splash fas fa-tools'></i>
+                </SplashCenter>
+            </SplashCard>
+        </SplashSequence>
+    );
+}
+
+const ExampleParallax = () => {
+    return(
+        <div>
+        <Parallax image={landscapeImage} style={{
+            width: '100%',
+            height: 'calc(100vh - 64px)'
+        }}>
+            <TimedFade>
+                <div className="example-parallax">
+                    <img src={mainLogoWhite} alt="JSWidgets main logo" />
+                    <h1>This is JSWidgets.</h1>
+                    <h3>A ReactJS component library with the speed of rapid prototyping and the quality of professional production.</h3>
+                </div>
+            </TimedFade>
+        </Parallax>
+        <Parallax image={starryImage} style={{
+            width: '100%',
+            height: 'calc(100vh - 64px)'
+        }} parallaxStyle={{
+            filter: 'brightness(70%)'
+        }} scaleY={0.3}>
+            <ScrollFade>
+                <div className="example-parallax">
+                    <h1>Everything you're seeing has been built with the JSWidgets library.</h1>
+                    <h3>Consult the examples from the navigation bar above, or continue scrolling to read more.</h3>
+                </div>
+            </ScrollFade>
+        </Parallax>
+        </div>
+    );
+}
 
 class ExampleApp extends React.Component {
 
@@ -35,78 +84,10 @@ class ExampleApp extends React.Component {
     render() {
         return(
             <div>
-            <SplashSequence>
-                <SplashCard wait={1800} animLength={2000} first>
-                    <SplashCenter image={mainLogo} title="JSWidgets" message="An extensive component library for ReactJS.  Do more in less time with JSWidgets." />
-                </SplashCard>
-                <SplashCard wait={1500} animLength={1200} style={{
-                    backgroundColor: 'rgb(255,170,0)'
-                }} indicatorColor='white' first>
-                    <SplashCenter image={splashImage2} title="A building block system with high level components." message="JSWidgets lets you repeat, nest, and copy modular widgets with ease.  It just works!"
-                    style={{ color: 'white' }} />
-                </SplashCard>
-                <SplashCard wait={1500} animLength={1200} first>
-                    <SplashCenter image={mainLogo} title="JSWidgets" message="An extensive component library for ReactJS.  Do more in less time with JSWidgets." />
-                </SplashCard>
-            </SplashSequence>
-            <Navigation shrink={180} hide={640} showOnScrollUp>
-                <NavigationLogo href="." image={mainLogoWhite} />
-                <NavigationGroup>
-                    <NavigationButton href="." label="Docs" />
-                    <NavigationButton href="." label="Blog" />
-                    <NavigationButton href="." label="Tutorial" />
-                </NavigationGroup>
-                <HamburgerMenu buttonType="topwide">
-                    <NavigationGroup>
-                        <NavigationButton href="." label="Docs" />
-                        <NavigationButton href="." label="Blog" />
-                        <NavigationButton href="." label="Tutorial" />
-                    </NavigationGroup>
-                    <NavigationGroup>
-                        <NavigationButton href="." label="Contact" />
-                        <NavigationButton href="." label="Privacy" />
-                        <NavigationButton href="." label="Terms & Conditions" />
-                    </NavigationGroup>
-                </HamburgerMenu>
-            </Navigation>
-            <Parallax image={landscapeImage} style={{
-                width: '100%',
-                height: 'calc(100vh - 64px)'
-            }}>
-                <p className="example-parallax">This is an example parallax title.</p>
-            </Parallax>
-            <Collapsable title="Collapsable Section" style={{ padding: '24px' }}>
-                <Collapsable title="Collapsable Form 1">
-                    <Form>
-                        <Collapsable title="Dropdown selectors">
-                            <Dropdown label="Select a number" content={[1, 2, 3]} name="dropdown-number" />
-                            <Dropdown label="Select a letter" content={['A', 'B', 'C']} name="dropdown-letter" />
-                        </Collapsable>
-                        <Collapsable title="Toggle switches">
-                            <Toggle label="Test toggle 1" name="toggle1" on></Toggle>
-                            <Toggle label="Test toggle 2" name="toggle2"></Toggle>
-                        </Collapsable>
-                        <Collapsable title="Radio buttons">
-                            <Radio label="Select an option" name="radio-option" content={["Option 1", "Option 2", "Option 3"]} />
-                        </Collapsable>
-                    </Form>
-                </Collapsable>
-                <Collapsable title="Collapsable Form 2">
-                    <Form>
-                        <Collapsable title="Dropdown selectors">
-                            <Dropdown content={[4, 5, 6]} name="dropdown-number" />
-                            <Dropdown content={['D', 'E', 'F']} name="dropdown-letter" />
-                        </Collapsable>
-                        <Collapsable title="Toggle switches">
-                            <Toggle label="Test toggle 3" name="toggle3" on></Toggle>
-                            <Toggle label="Test toggle 4" name="toggle4"></Toggle>
-                        </Collapsable>
-                        <Collapsable title="Radio buttons">
-                            <Radio label="Select a different option" name="radio-option" content={["Option A", "Option B", "Option C"]} />
-                        </Collapsable>
-                    </Form>
-                </Collapsable>
-            </Collapsable>
+                <ExampleSplash />
+                <ExampleNavigation />
+                <ExampleParallax />
+                <ExampleForm />
             </div>
         )
     }

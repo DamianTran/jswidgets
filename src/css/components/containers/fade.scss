@@ -1,0 +1,16 @@
+.jsw-scroll-fade {
+
+    transition: opacity 0.05s;
+
+}
+
+.jsw-timed-fade {
+
+    opacity: 1;
+
+    &.fade {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+}

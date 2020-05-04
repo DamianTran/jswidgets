@@ -35,11 +35,20 @@ class SplashCenter extends React.Component {
     render() {
         const { image, title, message } = this.state;
 
+        if(this.props.children) {
+            var childDOM = <div className="jsw-child-container">
+                {this.props.children}
+            </div>
+        } else {
+            var childDOM = null;
+        }
+
         return(
             <div className="jsw-splash-main">
-                <img src={image} alt="Splash image"/>
-                <h1 className="jsw-splash-header" style={this.props.style}>{title}</h1>
-                <h3 className="jsw-splash-message" style={this.props.style}>{message}</h3>
+                { this.props.image ? <img src={image} alt="Splash image"/> : null }
+                { this.props.title ? <h1 className="jsw-splash-header" style={this.props.style}>{title}</h1> : null }
+                { this.props.message ? <h3 className="jsw-splash-message" style={this.props.style}>{message}</h3> : null }
+                {childDOM}
             </div>
         );
     }
