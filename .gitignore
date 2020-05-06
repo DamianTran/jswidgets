@@ -3,4 +3,4 @@ dist
 .firebaserc
 firebase.json
 .firebase
-src/example/*
+src/example/
