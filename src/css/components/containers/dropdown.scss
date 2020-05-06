@@ -1,26 +1,41 @@
 .jsw-dropdown {
 
     max-height: 0;
-    transition: max-height 0.25s, opacity 0.25s;
+    transition: max-height 0.45s ease-in-out, opacity 0.35s ease-in-out 0.1s;
     background-color: white;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
 
-    .jsw-dropdown-item {
+    a {
+
         width: 100%;
-        padding: 16px;
-        box-sizing: border-box;
-        background-color: white;
-        cursor: pointer;
 
-        transition: background-color 0.25s;
+        .jsw-dropdown-item {
+            width: 100%;
+            box-sizing: border-box;
+            background-color: transparent;
+            cursor: pointer;
+            border: none;
 
-        &:hover {
-            background-color: rgb(225,225,225);
+            p {
+                font-size: 12px;
+                letter-spacing: 1px;
+                margin: 6px 0;
+                position: relative;
+            }
         }
+
     }
 
     &.open {
-        max-height: 512px;
+        max-height: 50vh;
         opacity: 1;
+        pointer-events: all;
     }
 
 }

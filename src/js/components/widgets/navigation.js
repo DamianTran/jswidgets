@@ -1,6 +1,7 @@
 import styles from "../../../css/components/widgets/navigation.scss";
 
 import ClickZone from "../primitives/clickzone";
+import Dropdown from "../containers/dropdown";
 
 import {
     jswFirstVisit,
@@ -88,14 +89,55 @@ class NavigationButton extends React.Component {
             href: props.href,
             label: props.label
         };
+
+        this.dropdown = React.createRef();
+    }
+
+    hoverOn = () => {
+        if(this.props.children) {
+            this.dropdown.current.open();
+        }
+    }
+
+    hoverOff = () => {
+        if(this.props.children) {
+            this.dropdown.current.close();
+        }
     }
 
     render() {
         const { href, label } = this.state;
+
+        if(this.props.children) {
+            var dropdown = <Dropdown ref={this.dropdown}>
+                {this.props.children}
+            </Dropdown>;
+
+            switch(this.props.arrow) {
+                case 'chevron':
+                    var arrowClass = "jsw-chevron";
+                    break;
+                default:
+                    var arrowClass = "jsw-arrow";
+            }
+
+            var labelDOM = [
+                <p key={0}>{label}</p>, 
+                <div className={arrowClass} key={2}></div>
+            ];
+
+        } else {
+            var dropdown = null;
+            var labelDOM = <p>{label}</p>
+        }
+
         return(
-            <a className="jsw-navigation-link" href={href}>
-                <button className="jsw-navigation-button" type="button">{label}</button>
-            </a>
+            <div className="jsw-navigation-item"  onMouseEnter={this.hoverOn} onMouseLeave={this.hoverOff}>
+                <a className="jsw-navigation-link" href={href}>
+                    <button className="jsw-navigation-button" type="button">{labelDOM}</button>
+                </a>
+                {dropdown}
+            </div>
         )
     }
 }
@@ -105,28 +147,56 @@ class NavigationDropdown extends React.Component {
         super(props);
 
         this.state = {
+            href: props.href,
             label: props.label
         };
 
-        this.ref = React.createRef();
+        this.dropdown = React.createRef();
+    }
+
+    hoverOn = () => {
+        if(this.props.children) {
+            this.dropdown.current.open();
+        }
+    }
+
+    hoverOff = () => {
+        if(this.props.children) {
+            this.dropdown.current.close();
+        }
     }
 
     render() {
+
+        const { label, href } = this.state;
+
+        switch(this.props.arrow) {
+            case 'chevron':
+                var arrowClass = "jsw-chevron";
+                break;
+            default:
+                var arrowClass = "jsw-arrow";
+        }
+
         return(
-            <button className="jsw-navigation-button" type="button">
-                <p>{this.state.label}</p>
-                <div class="jsw-arrow"></div>
-                <Dropdown ref={this.ref} style={{
+            <div className="jsw-navigation-item" onMouseEnter={this.hoverOn} onMouseLeave={this.hoverOff}>
+                <a className="jsw-navigation-link" href={href}>
+                    <button className="jsw-navigation-button" type="button">
+                        <p>{label}</p>
+                        <div className={arrowClass}></div>
+                    </button>
+                </a>
+                <Dropdown ref={this.dropdown} style={{
                     position: 'absolute',
                     top: '100%',
                     left: '0',
-                    width: '200%',
-                    borderRadius: '0 12px 12px 12px',
-                    backgroundColor: 'var(--themeNavigation)'
+                    width: `${this.props.children.length * 100}%`,
+                    borderRadius: '0 0 4px 4px',
+                    backgroundColor: 'var(--themeNavigationAlpha)'
                 }}>
                     {this.props.children}
                 </Dropdown>
-            </button>
+            </div>
         )
 
     }
@@ -234,5 +304,6 @@ export {
     NavigationButton,
     NavigationLogo,
     NavigationGroup,
+    NavigationDropdown,
     HamburgerMenu
 };

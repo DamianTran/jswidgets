@@ -33,3 +33,12 @@ div {
         transform: skewY(-45deg);
     }
 }
+
+.jsw-arrow {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid rgb(120,120,120);
+}

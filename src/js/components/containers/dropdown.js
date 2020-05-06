@@ -1,29 +1,33 @@
-import styles from "../../../css/components/widgets/dropdown";
+import styles from "../../../css/components/containers/dropdown.scss";
+
+import ClickZone from "../primitives/clickzone";
 
 class DropdownItem extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            text: props.text,
+            label: props.label,
             href: props.href
         };
     }
 
     render() {
 
-        const { href, text } = this.state;
+        const { href, label } = this.state;
 
         return (
-            <button className="jsw-dropdown-item" style={this.props.style}>
-                <a href={href}>{text}</a>
-                {this.props.children}
-            </button>
+            <a href={href}>
+                <button className="jsw-dropdown-item" style={this.props.style}>
+                    <p>{label}</p>
+                    {this.props.children}
+                </button>
+            </a>
         );
     }
 }
 
-export default class Dropdown extends ClickZone {
+export default class Dropdown extends React.Component {
 
     static defaultProps = {
         open: false
@@ -32,9 +36,9 @@ export default class Dropdown extends ClickZone {
     constructor(props) {
         super(props);
 
-        this.extendState({
+        this.state = {
             open: props.open
-        });
+        };
     }
 
     open = () => {
@@ -56,11 +60,13 @@ export default class Dropdown extends ClickZone {
     }
 
     render() {
-        const { open, clicked } = this.state;
+        const { open } = this.state;
 
-        <div className={`jsw-dropdown${ open && clicked ? " open" : "" }`} style={this.props.style}>
-            {this.props.children}
-        </div>
+        return(
+            <div className={`jsw-dropdown${ open ? " open" : "" }`} style={this.props.style}>
+                {this.props.children}
+            </div>
+        );
     }
 }
 

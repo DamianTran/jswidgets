@@ -64,7 +64,7 @@ const ExampleParallax = () => {
         }} parallaxStyle={{
             filter: 'brightness(70%)'
         }} scaleY={0.3}>
-            <ScrollFade>
+            <ScrollFade in out>
                 <div className="example-parallax">
                     <h1>Everything you're seeing has been built with the JSWidgets library.</h1>
                     <h3>Consult the examples from the navigation bar above, or continue scrolling to read more.</h3>
@@ -87,7 +87,6 @@ class ExampleApp extends React.Component {
                 <ExampleSplash />
                 <ExampleNavigation />
                 <ExampleParallax />
-                <ExampleForm />
             </div>
         )
     }
