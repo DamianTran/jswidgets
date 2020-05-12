@@ -1,0 +1,54 @@
+:root {
+    --themeInputLabel: rgb(140,140,140);
+    --themeInputPlaceholder: rgb(220,220,220);
+    --themeInputText: rgb(60,60,60);
+    --themeInputBackground: transparent;
+    --themeInputBorder: rgb(220,220,220);
+}
+
+.jsw-input {
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+
+    label {
+        font-size: 14px;
+        letter-spacing: 1px;
+        color: var(--themeInputLabel);
+        margin-right: 14px;
+    }
+
+    input, textarea {
+        font-size: 14px;
+        letter-spacing: 1px;
+        padding: 12px;
+        box-sizing: border-box;
+        border: none;
+        border-bottom: 1px solid var(--themeInputBorder);
+        color: var(--themeInputText);
+
+        &::placeholder {
+            color: var(--themeInputPlaceholder);
+        }
+    }
+
+    .jsw-close {
+        position: absolute;
+        right: 8px;
+        top: calc(50% - 6px);
+        height: 12px;
+        width: 12px;
+        opacity: 0;
+
+        transition: opacity 0.25s;
+    }
+
+    &.focus {
+        .jsw-close {
+            opacity: 1;
+        }
+    }
+
+}
