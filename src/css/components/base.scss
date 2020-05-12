@@ -42,3 +42,31 @@ div {
     border-right: 6px solid transparent;
     border-top: 8px solid rgb(120,120,120);
 }
+
+.jsw-close {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+
+    &::before, &::after {
+        background-color: rgb(160,160,160);
+        height: 2px;
+        width: 100%;
+        position: absolute;
+        content: "";
+        transform-origin: center;
+        left: 0;
+        top: calc(50% - 1px);
+    }
+
+    &::before {
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        transform: rotate(-45deg);
+    }
+}

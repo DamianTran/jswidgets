@@ -1,4 +1,4 @@
-import styles from "../../../css/components/primitives/input";
+import styles from "../../../css/components/primitives/input.scss";
 
 var JSWLabelUID = 0;
 
@@ -27,10 +27,52 @@ export default class Input extends React.Component {
 
         this.labelID = "jsw-input-" + JSWLabelUID;
         ++JSWLabelUID;
+
+        this.parentOnChange = props.onChange;
+        this.parentOnTrigger = props.onTrigger;
     }
 
     handleChange = event => {
-        console.log(event);
+        this.setState({
+            value: event.target.value
+        });
+
+        if(this.parentOnChange) {
+            this.parentOnChange(event);
+        }
+    }
+
+    onTrigger = () => {
+        if(this.parentOnTrigger) {
+            this.parentOnTrigger(this.state.value);
+        }
+    }
+
+    onFocus = () => {
+        this.setState({
+            focus: true
+        });
+    }
+
+    onBlur = () => {
+        this.setState({
+            focus: false
+        });
+    }
+
+    clear = event => {
+        this.setState({
+            value: ""
+        });
+        if(this.parentOnChange) {
+            this.parentOnChange(event);
+        }
+    }
+
+    onKeyDown = event => {
+        if(event.key === 'Enter') {
+            this.onTrigger();
+        }
     }
 
     render() { 
@@ -47,7 +89,7 @@ export default class Input extends React.Component {
         } = this.state;
 
         if(label) {
-            var labelDOM = <label for={this.labelID}>{label}</label>
+            var labelDOM = <label htmlFor={this.labelID}>{label}</label>
         } else {
             var labelDOM = null;
         }
@@ -59,9 +101,12 @@ export default class Input extends React.Component {
                 type={type} 
                 style={this.props.style} 
                 placeholder={placeholder} 
-                readonly={readonly} 
+                readOnly={readonly} 
                 value={value} 
-                onChange={this.handleChange}></textarea>
+                onChange={this.handleChange}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onKeyDown={this.onKeyDown}></textarea>
         } else {
             var inputDOM = 
             <input 
@@ -69,15 +114,21 @@ export default class Input extends React.Component {
                 type={type} 
                 style={this.props.style} 
                 placeholder={placeholder}
-                readonly={readonly} 
+                readOnly={readonly} 
                 value={value} 
-                onChange={this.handleChange} />
+                onChange={this.handleChange}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onKeyDown={this.onKeyDown} />
         }
 
         return(
-            <div className="jsw-input">
+            <div className={ `jsw-input${ focus ? " focus": "" }`}>
                 {labelDOM}
-                {inputDOM}
+                <div className="jsw-input-wrapper">
+                    {inputDOM}
+                    <button className="jsw-close" onClick={this.clear}></button>
+                </div>
             </div>
         );
 

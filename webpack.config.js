@@ -56,7 +56,8 @@ const libConfig = {
 const exampleConfig = {
     entry: {
         'home': "./src/example/js/pages/home.js",
-        'exampleform': "./src/example/js/pages/form.js"
+        'exampleform': "./src/example/js/pages/form.js",
+        'exampleinput': "./src/example/js/pages/input.js"
     },
     module: {
         rules: [
@@ -101,6 +102,11 @@ const exampleConfig = {
             template: './src/example/form.html',
             chunks: ['exampleform'],
             filename: './form.html'
+        }),
+        new HtmlWebPackPlugin({
+            template: './src/example/input.html',
+            chunks: ['exampleinput'],
+            filename: './input.html'
         }),
         new webpack.ProvidePlugin({
             "$": 'jquery',
