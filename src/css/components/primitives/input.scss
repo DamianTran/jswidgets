@@ -13,6 +13,17 @@
     box-sizing: border-box;
     position: relative;
 
+    .jsw-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 28px;
+        margin-right: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--themeInputLabel);
+    }
+
     label {
         font-size: 14px;
         letter-spacing: 1px;
@@ -28,6 +39,7 @@
         border: none;
         border-bottom: 1px solid var(--themeInputBorder);
         color: var(--themeInputText);
+        width: 100%;
 
         &::placeholder {
             color: var(--themeInputPlaceholder);

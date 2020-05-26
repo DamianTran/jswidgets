@@ -7,6 +7,90 @@ import {
     jswFirstVisit,
     jswNumVisits
 } from "../../utils/localStorage";
+import { thisExpression } from "babel-types";
+
+class HamburgerButton extends React.Component {
+
+    static defaultProps = {
+        buttonType : "square",
+        open: false,
+        style: {}
+    };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            buttonType: props.buttonType,
+            open: props.open
+        }
+
+        this.onClick = props.onClick;
+    }
+
+    toggle = () => {
+        this.setState({
+            open: !this.state.open
+        });
+        this.onClick(this.state.open);
+    }
+
+    close = () => {
+        this.setState({
+            open: false
+        });
+    }
+
+    render() {
+
+        const { buttonType, open } = this.state;
+        const { lines, background } = this.props.style;
+        const { className } = this.props;
+
+        let lineDOM = [];
+
+        switch(buttonType) {
+            case 'midwide':
+            case 'topwide':
+            case 'bottomwide':
+            case 'topwide-left':
+            case 'midwide-left':
+            case 'bottomwide-left':
+                lineDOM = [
+                    <div className="line" style={lines} key={1}></div>,
+                    <div className="line" style={lines} key={2}></div>,
+                    <div className="line" style={lines} key={3}></div>
+                ];
+                break;
+            case 'topwide2':
+            case 'bottomwide2':
+            case 'topwide2-left':
+            case 'bottomwide2-left':
+                lineDOM = [
+                    <div className="line" style={lines} key={1}></div>,
+                    <div className="line" style={lines} key={2}></div>
+                ];
+                break;
+            default:
+                lineDOM = [
+                    <div className="line" style={lines} key={1}></div>,
+                    <div className="line" style={lines} key={2}></div>,
+                    <div className="line" style={lines} key={3}></div>
+                ];
+        }
+
+        return(
+            <div 
+                type="button" 
+                className={`jsw-hamburger-button${ open ? " open " : "" } ${buttonType}${ className ? " " + className : ""}`}
+                onClick={this.toggle}
+                style={background}>
+                    {lineDOM}
+            </div>
+        )
+
+    }
+}
 
 class HamburgerMenu extends React.Component {
     constructor(props) {
@@ -30,49 +114,20 @@ class HamburgerMenu extends React.Component {
         });
     }
 
-    toggle = () => {
+    toggle = state => {
         this.setState({
-            open: !this.state.open
+            open: state
         });
     }
 
     render() {
 
         const { buttonType, open } = this.state;
-
-        let lines = [];
-
-        switch(buttonType) {
-            case 'midwide':
-            case 'topwide':
-            case 'bottomwide':
-                lines = [
-                    <div className="line" key={1}></div>,
-                    <div className="line" key={2}></div>,
-                    <div className="line" key={3}></div>
-                ];
-                break;
-            case 'topwide2':
-            case 'bottomwide2':
-                lines = [
-                    <div className="line" key={1}></div>,
-                    <div className="line" key={2}></div>
-                ];
-                break;
-            default:
-                lines = [
-                    <div className="line" key={1}></div>,
-                    <div className="line" key={2}></div>,
-                    <div className="line" key={3}></div>
-                ];
-        }
         
         return(
             [ 
-                <div type="button" className={`jsw-hamburger-button${ open ? " open " : "" } ${buttonType}`} onClick={this.toggle} key={1}>
-                    {lines}
-                </div>,
-                <div className={`jsw-hamburger-menu${ open ? " open" : "" }`} key={2}>
+                <HamburgerButton buttonType={buttonType} open={open} key={0} onClick={state => { this.toggle(state); }}/>,
+                <div className={`jsw-hamburger-menu${ open ? " open" : "" }`} key={1}>
                     {this.props.children}
                 </div>
             ]
@@ -305,5 +360,6 @@ export {
     NavigationLogo,
     NavigationGroup,
     NavigationDropdown,
-    HamburgerMenu
+    HamburgerMenu,
+    HamburgerButton
 };

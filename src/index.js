@@ -5,6 +5,8 @@ import jsw_base_styles from "./css/components/base.scss";
 
 import Indicator from "./js/components/primitives/indicator";
 import Input from "./js/components/primitives/input";
+import Button from "./js/components/primitives/button";
+import Loader from "./js/components/primitives/loader";
 
 /* Containers */
 import Collapsable from "./js/components/containers/collapsable";
@@ -23,6 +25,7 @@ import {
     Row,
     Grid
 } from "./js/components/containers/grid";
+import View from "./js/components/containers/view";
 
 /* Widgets */
 
@@ -42,12 +45,19 @@ import {
     SplashCard,
     SplashSequence
 } from "./js/components/widgets/splash";
+import Modal from "./js/components/widgets/modal";
+
+/* Interfaces */
+
+import Dashboard from "./js/components/interfaces/dashboard";
 
 /* Exports */
 
  export {
      Input,
      Collapsable,
+     Button,
+     Loader,
      Form,
      Selector,
      Parallax,
@@ -56,6 +66,7 @@ import {
      Column,
      Row,
      Grid,
+     View,
      Dropdown,
      DropdownItem,
      Toggle,
@@ -69,5 +80,7 @@ import {
      SplashCenter,
      SplashCard,
      SplashSequence,
-     Indicator
+     Indicator,
+     Modal,
+     Dashboard
  };

@@ -3,11 +3,18 @@ import style from '../../../css/components/containers/collapsable.css';
 var JSCollapsableUID = 0;
 
 export default class Collapsable extends React.Component {
+
+    static defaultProps = {
+        open: true
+    }
+
     constructor(props) {
         super(props);
+        
         this.hasClickOff = props.hasClickOff ? props.hasClickOff : false;
+
         this.state = {
-            open: props.open ? props.open : true,
+            open: props.open,
             title: props.title
         }
         this.overflowTimeout = null;

@@ -1,4 +1,4 @@
-import styles from "../../../css/components/primitives/button.css";
+import styles from "../../../css/components/primitives/button.scss";
 
 import Loader from "./loader";
 
@@ -23,12 +23,24 @@ export default class Button extends React.Component {
         });
     }
 
+    setLoading = (state) => {
+        this.setState({
+            loading: state
+        });
+    }
+
     render() {
         const { value, loading } = this.state;
+        const { className, style } = this.props;
         return(
-            <button className="jsw-button" type="button" onClick={this.onClick}>
+            <button 
+                className={`jsw-button${ loading ? " loading" : "" }${className ? ' ' + className : ""}`} type="button" onClick={this.onClick}
+                style={style}>
                 <Loader loading={loading}></Loader>
-                {value}
+                <div className="jsw-button-content">
+                    {value}
+                    {this.props.children}
+                </div>
             </button>
         );
     }

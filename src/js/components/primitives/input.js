@@ -8,21 +8,25 @@ export default class Input extends React.Component {
         animation: 'static',
         paragraph: false,
         placeholder: "",
-        label: ""
+        label: "",
+        type: 'text',
+        readOnly: false,
+        value: ""
     };
 
     constructor(props) {
         super(props);
 
         this.state = {
-            value: "",
+            value: props.value,
             focus: false,
-            readonly: false,
+            readOnly: props.readOnly,
             placeholder: props.placeholder,
-            type: 'text',
+            type: props.type,
             label: props.label,
             animation: props.animation,
-            paragraph: props.paragraph
+            paragraph: props.paragraph,
+            required: props.required
         };
 
         this.labelID = "jsw-input-" + JSWLabelUID;
@@ -30,9 +34,27 @@ export default class Input extends React.Component {
 
         this.parentOnChange = props.onChange;
         this.parentOnTrigger = props.onTrigger;
+        this.icon = props.icon;
+        this.input = React.createRef();
+
+        this.lastPropsValue = props.value;
+        this.lastStateValue = this.state.value;
+    }
+
+    static getDerivedStateFromProps = (props, state) => {
+        if(this.lastPropsValue !== props.value) {
+            this.lastPropsValue = props.value;
+            return({
+                value: props.value,
+                readOnly: props.readOnly
+            });
+        } else {
+            return({});
+        }
     }
 
     handleChange = event => {
+
         this.setState({
             value: event.target.value
         });
@@ -75,16 +97,30 @@ export default class Input extends React.Component {
         }
     }
 
+    value = () => {
+        return this.state.value;
+    }
+
+    validate = () => {
+        if(this.input.current.checkValidity()) {
+            return true;
+        } else {
+            this.input.current.reportValidity();
+            return false;
+        }
+    }
+
     render() { 
 
         const {
             value,
             focus,
-            readonly,
+            readOnly,
             type,
             label,
             placeholder,
             animation,
+            required,
             paragraph
         } = this.state;
 
@@ -101,12 +137,14 @@ export default class Input extends React.Component {
                 type={type} 
                 style={this.props.style} 
                 placeholder={placeholder} 
-                readOnly={readonly} 
+                readOnly={readOnly} 
                 value={value} 
                 onChange={this.handleChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
-                onKeyDown={this.onKeyDown}></textarea>
+                onKeyDown={this.onKeyDown}
+                ref={this.input}
+                required={required}></textarea>
         } else {
             var inputDOM = 
             <input 
@@ -114,20 +152,24 @@ export default class Input extends React.Component {
                 type={type} 
                 style={this.props.style} 
                 placeholder={placeholder}
-                readOnly={readonly} 
+                readOnly={readOnly} 
                 value={value} 
                 onChange={this.handleChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
-                onKeyDown={this.onKeyDown} />
+                onKeyDown={this.onKeyDown}
+                ref={this.input}
+                required={required} />
         }
 
         return(
-            <div className={ `jsw-input${ focus ? " focus": "" }`}>
+            <div 
+                className={ `jsw-input${ focus ? " focus": "" }`}>
+                {this.icon ? <div className='jsw-icon'>{this.icon}</div> : null}
                 {labelDOM}
                 <div className="jsw-input-wrapper">
                     {inputDOM}
-                    <button className="jsw-close" onClick={this.clear}></button>
+                    { readOnly ? null : <div className="jsw-close" onClick={this.clear}></div> }
                 </div>
             </div>
         );
