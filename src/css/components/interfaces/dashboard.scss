@@ -1,0 +1,170 @@
+@import "../../utils.scss";
+
+:root {
+    --dashboardNavigation: rgb(30,30,30);
+    --dashboardHighlight: rgb(60,60,60);
+}
+
+.jsw-dashboard {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+
+    .jsw-dashboard-main {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .jsw-dashboard-views {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .jsw-hamburger-button {
+        position: absolute;
+        z-index: 3;
+        width: 32px;
+        height: 32px;
+        top: 22px;
+        margin: 0;
+
+        &.right {
+            right: 20px;
+        }
+
+        &.left {
+            left: 20px;
+        }
+
+        .line {
+            background-color: rgb(190,190,190);
+        }
+    }
+
+    .jsw-dashboard-navigation {
+        display: flex;
+        position: absolute;
+        z-index: 2;
+        pointer-events: none;
+
+        .jsw-navigation-list {
+            position: absolute;
+            z-index: 1;
+            background-color: var(--dashboardNavigation);
+            box-shadow: none;
+            width: 100%;
+            height: 100%;
+
+            transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+            .jsw-navigation-button {
+                width: 100%;
+                height: 64px;
+                align-items: center;
+                display: flex;
+                cursor: pointer;
+                background-color: var(--dashboardNavigation);
+
+                transition: background-color 0.25s;
+
+                @include mobile {
+                    justify-content: center;
+                }
+
+                @include desktop {
+                    padding: 18px;
+                }
+
+                h3 {
+                    @include mobile {
+                        display: none;
+                    }
+
+                    @include desktop {
+                        font-size: 14px;
+                        color: white;
+                        letter-spacing: 1px;
+                        margin-left: 12px;
+                    }
+                }
+
+                svg {
+                    font-size: 28px;
+                    color: white;
+                }
+
+                &:hover {
+                    background-color: var(--dashboardHighlight);
+                }
+            }
+
+        }
+
+        &.open {
+            pointer-events: all;
+            .jsw-navigation-list {
+                box-shadow: 0 0 8px 2px rgba(0,0,0,0.3);
+            }
+        }
+
+        &.left, &.right {
+            width: 212px;
+            height: 100%;
+
+            @include mobile {
+                width: 64px;
+            }
+        }
+
+        &.left {
+            .jsw-navigation-list {
+                transform: translateX(-100%);
+            }
+
+            &.open .jsw-navigation-list {
+                transform: translateX(0);
+            }
+        }
+
+        &.right {
+            right: 0;
+            .jsw-navigation-list {
+                transform: translateX(100%);
+            }
+
+            &.open .jsw-navigation-list {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    .jsw-navigation-top {
+
+        width: 100%;
+        height: 76px;
+        min-height: 76px;
+        position: relative;
+    
+        background-color: white;
+        box-shadow: 0 4px 6px 0 rgba(0,0,0,0.15);
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        & > img {
+            height: 80%;
+            width: auto;
+            margin-top: 28px;
+        }
+    
+    }
+
+}

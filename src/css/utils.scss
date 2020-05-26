@@ -1,0 +1,11 @@
+@mixin mobile {
+    @media (max-aspect-ratio: 10/9) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-aspect-ratio: 10/9) {
+        @content;
+    }
+}

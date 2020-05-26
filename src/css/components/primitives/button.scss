@@ -1,0 +1,52 @@
+.jsw-button {
+    padding: 14px 36px;
+    min-width: 128px;
+    font-size: 16px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--themeButton);
+    border: none;
+    border-bottom: 4px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    color: var(--themeButtonText);
+    box-sizing: border-box;
+
+    transition: filter 0.2s ease-in-out, opacity 0.4s ease-in-out;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        filter: brightness(108%);
+    }
+
+    &:active {
+        filter: brightness(80%);
+    }
+
+    &.inactive {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .jsw-button-content {
+        opacity: 1;
+        transition: opacity 0.35s;
+        display: flex;
+        align-items: center;
+    }
+
+    &.loading {
+
+        pointer-events: none;
+
+        .jsw-button-content {
+            opacity: 0;
+        }
+
+    }
+}

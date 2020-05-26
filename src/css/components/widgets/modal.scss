@@ -1,0 +1,77 @@
+.jsw-modal {
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 105;
+    opacity: 0;
+    pointer-events: none;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: opacity 0.3s ease-in-out;
+
+    .jsw-modal-frame {
+        transform: scale(1.2,1.2);
+        transform-origin: center;
+        transition: transform 0.3s ease-in-out 0.1s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 22px;
+        width: 80%;
+        background-color: rgba(255,255,255,0.85);
+        box-shadow: 4px 4px 6px 0 rgba(0,0,0,0.3);
+        border-radius: 4px;
+
+        & > h1 {
+            font-size: 20px;
+            letter-spacing: 2px;
+            font-weight: 200;
+            color: rgb(60,60,60);
+            margin: 0 0 12px 0;
+            text-align: center;
+        }
+
+        & > p {
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: rgb(100,100,100);
+            margin: 0;
+        }
+
+        .jsw-close {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+        }
+
+        .jsw-modal-buttons {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            margin-top: 24px;
+
+            .jsw-button {
+                min-width: 58px;
+                height: 46px;
+            }
+        }
+    }
+
+    &.open {
+        opacity: 1;
+        pointer-events: all;
+
+        .jsw-modal-frame {
+            transform: scale(1, 1);
+        }
+    }
+
+}

@@ -1,0 +1,15 @@
+.jsw-view {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: opacity 0.3s ease-in-out 0.15s;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+
+        transition: opacity 0.3s ease-in-out;
+    }
+}

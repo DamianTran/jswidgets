@@ -1,0 +1,21 @@
+@keyframes jsw-loader-spin{
+    0%{ transform: rotate(0deg); }
+    100%{ transform: rotate(360deg); }
+}
+
+.jsw-loader {
+    position: absolute;
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-top: 4px solid white;
+
+    transition: opacity 0.4s;
+
+    &.loading {
+        opacity: 1;
+        animation: jsw-loader-spin 0.8s ease-in-out infinite;
+    }
+}
