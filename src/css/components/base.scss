@@ -10,6 +10,41 @@ div {
     position: relative;
 }
 
+*[tooltip] {
+
+  &::after {
+    content: attr(tooltip);
+    position: absolute;
+    z-index: 1014;
+    background-color: black;
+    color: white;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 100;
+    padding: 4px 6px;
+    box-sizing: border-box;
+    text-align: center;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    font-family: Arial, Helvetica, Times;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+    box-shadow: 4px 4px 6px 0 rgba(0,0,0,0.42);
+
+    transition: opacity 0.4s;
+  }
+
+  &:hover {
+    &::after {
+      opacity: 1;
+      transition: opacity 0.25s linear 0.4s;
+    }
+  }
+}
+
 .jsw-chevron {
     position: relative;
     width: 16px;
@@ -72,4 +107,28 @@ div {
     &::after {
         transform: rotate(-45deg);
     }
+}
+
+.jsw-error-boundary {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+
+  h1 {
+    font-size: 48px;
+    color: rgb(220,220,220);
+    margin: 0 0 22px 0;
+    text-align: center;
+  }
+
+  p {
+    color: rgb(60,60,60);
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+  }
 }

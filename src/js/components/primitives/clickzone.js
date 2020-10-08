@@ -26,3 +26,5 @@ export default class ClickZone extends ExtendableComponent {
     }
 
 }
+
+export { ClickZone };

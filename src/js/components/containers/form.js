@@ -79,3 +79,5 @@ export default class Form extends FormType {
 
     }
 }
+
+export { Form };

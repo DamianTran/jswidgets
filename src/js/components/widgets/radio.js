@@ -1,90 +1,128 @@
-import styles from "../../../css/components/widgets/radio.scss";
+import "../../../css/components/widgets/radio.scss";
 
-var JSRadioUID = 0;
+const RadioItem = props => {
 
-class RadioItem extends React.Component {
-    constructor(props) {
-        super(props);
+    const {
+      selected,
+      id,
+      value,
+      label,
+      onSelect
+    } = props;
 
-        this.state = {
-            value: props.value,
-            selected: props.selected,
-            id: props.id,
-            index: props.index
-        }
-
-        this.onSelect = props.onSelect;
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        return({
-            value: props.value,
-            selected: props.selected,
-            id: props.id,
-            index: props.index
-        });
-    }
-
-    render = () => {
-        const {selected, index, id, value} = this.state;
-
-        return(
-            <div className={`jsw-radio-item${ index == selected ? " selected" : "" }`} value={value} onClick={() => {this.onSelect(index)}}>
-                <label htmlFor={id}>{value}</label>
-                <button type="button" id={id} className="jsw-radio-button"></button>
-            </div>
-        )
-    }
+    return (
+      <div 
+        className={`jsw-radio-item${selected ? " selected" : ""}`}
+        onClick={() => { onSelect(value) }}>
+          <label 
+            htmlFor={id}>{label || value}</label>
+          <button 
+            type="button" id={id} 
+            className="jsw-radio-button"></button>
+      </div>
+    );
+  
 }
 
 export default class Radio extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state ={
-            selected: props.selected ? props.selected : 0,
-            content: props.content ? props.content : [],
-            label: props.label ? props.label : ""
-        };
+  static defaultProps = {
+    toggle: false,
+    content: []
+  };
+
+  static __guid = 0;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: props.value,
+      lastValue: props.value
+    };
+
+    this.id = `jsw-radio-${Radio.__guid++}`;
+  }
+
+  static getDerivedStateFromProps = (props, state) => {
+    const output = {};
+    if(state.lastValue !== props.value) {
+      output.lastValue = output.value = props.value;
     }
+    return output;
+  }
 
-    selectItem = (index) => {
+  selectItem = (value) => {
+
+    const {
+      toggle,
+      name,
+      onChange
+    } = this.props;
+
+    if(toggle && this.state.value === value) {
         this.setState({
-            selected: index
+          value: null
+        }, () => {
+          if (onChange) {
+            onChange(this.state.value, name);
+          }
         });
-    }
-
-    fill = (content) => {
-        let items = [];
-        const { selected } = this.state;
-
-        if(content) {
-            let i = 0;
-            for(const item of content) {
-                let id = "jsradio-" + JSRadioUID;
-                ++JSRadioUID;
-
-                items.push(<RadioItem key={item} index={i} value={item} id={id} selected={selected} onSelect={this.selectItem}/>);
-                ++i;
-            }
+    } else {
+      this.setState({
+        value: value
+      }, () => {
+        if (onChange) {
+          onChange(this.state.value, name);
         }
-
-        return items;
-
+      });
     }
 
-    render() {
+  }
 
-        const {
-            content,
-            label
-        } = this.state;
+  getValue = () => {
+    return this.state.value;
+  }
 
-        return (
-            <div className="jsw-radio">
-                <h3>{label}</h3>
-                {this.fill(content)}
-            </div>
-        );
-    }
+  setValue = (newValue) => {
+    this.setState({
+      value: newValue
+    });
+  }
+
+  render() {
+
+    const {
+      options,
+      label
+    } = this.props;
+
+    const {
+      value
+    } = this.state;
+
+    let optionsDOM = options.map((v, i) => {
+
+      let itemIsObject = typeof v === 'object' && v;
+      let itemValue = itemIsObject ? v.name || v.label : v;
+      
+      return <RadioItem
+                key={name}
+                id={this.id}
+                value={itemValue}
+                label={itemIsObject ? v.label || v.name : v}
+                selected={itemValue === value}
+                onSelect={this.selectItem} />
+
+    });
+
+    return (
+      <div className="jsw-radio">
+        { label ? <h3>{label}</h3> : null }
+        {optionsDOM}
+      </div>
+    );
+  }
 }
+
+export { Radio };

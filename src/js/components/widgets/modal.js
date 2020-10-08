@@ -6,7 +6,7 @@ import styles from "../../../css/components/widgets/modal.scss";
 export default class Modal extends React.Component {
 
     static defaultProps = {
-        buttons: [
+        options: [
             'OK'
         ],
         open: false
@@ -18,7 +18,8 @@ export default class Modal extends React.Component {
         this.state = {
             header: props.header,
             body: props.body,
-            open: props.open
+            open: props.open,
+            options: props.options
         };
 
         this.frame = React.createRef();
@@ -26,10 +27,10 @@ export default class Modal extends React.Component {
 
     respond = label => {
 
-        close();
+        this.close();
         
         if(this.callback) {
-            this.callback();
+            this.callback(label);
         }
 
     }
@@ -41,8 +42,12 @@ export default class Modal extends React.Component {
         });
     }
 
-    prompt = (header, body, callback) => {
-        this.setText(header, body);
+    prompt = (header, body, callback, options = [ 'OK' ]) => {
+        this.setState({
+            header: header,
+            body: body,
+            options: options
+        });
         this.open();
         this.callback = callback;
     }
@@ -71,13 +76,17 @@ export default class Modal extends React.Component {
 
     render() {
 
-        const { open, header, body } = this.state;
+        const { open, header, body, options } = this.state;
 
         let buttons = [];
 
-        for(const label of this.props.buttons) {
-            buttons.push(<Button value={label} key={label} onClick={() => {this.respond(label)}} />);
-        }
+        options.map((label, i) => {
+            buttons[i] = <Button 
+                            value={label} 
+                            key={label} 
+                            onClick={() => {this.respond(label)}} />;
+        });
+        
 
         return (
             <div className={`jsw-modal${ open ? " open" : ""}`}>
@@ -104,3 +113,5 @@ export default class Modal extends React.Component {
         document.removeEventListener('mousedown', this.handleClick, false);
     }
 }
+
+export { Modal };

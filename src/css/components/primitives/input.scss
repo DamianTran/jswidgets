@@ -1,6 +1,6 @@
 :root {
     --themeInputLabel: rgb(140,140,140);
-    --themeInputPlaceholder: rgb(220,220,220);
+    --themeInputPlaceholder: rgb(210,210,210);
     --themeInputText: rgb(60,60,60);
     --themeInputBackground: transparent;
     --themeInputBorder: rgb(220,220,220);
@@ -12,38 +12,48 @@
     align-items: center;
     box-sizing: border-box;
     position: relative;
+    max-height: 512px;
+
+    transition: opacity 0.3s, max-height 0.3s;
 
     .jsw-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 28px;
-        margin-right: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--themeInputLabel);
+      width: 32px;
+      height: 32px;
+      font-size: 28px;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--themeInputLabel);
     }
 
     label {
         font-size: 14px;
-        letter-spacing: 1px;
         color: var(--themeInputLabel);
         margin-right: 14px;
     }
 
     input, textarea {
         font-size: 14px;
-        letter-spacing: 1px;
         padding: 12px;
         box-sizing: border-box;
-        border: none;
-        border-bottom: 1px solid var(--themeInputBorder);
         color: var(--themeInputText);
         width: 100%;
+        resize: none;
 
         &::placeholder {
             color: var(--themeInputPlaceholder);
         }
+    }
+
+    input {
+      border: none;
+      border-bottom: 1px solid var(--themeInputBorder);
+    }
+
+    textarea {
+      height: 128px;
+      border: 1px solid var(--themeInputBorder);
     }
 
     .jsw-close {
@@ -53,14 +63,21 @@
         height: 12px;
         width: 12px;
         opacity: 0;
+        pointer-events: none;
+        user-select: none;
 
         transition: opacity 0.25s;
+
+        &.jsw-close-visible {
+          opacity: 1;
+          pointer-events: all;
+          user-select: unset;
+        }
     }
 
-    &.focus {
-        .jsw-close {
-            opacity: 1;
-        }
+    &.jsw-hidden {
+        opacity: 0;
+        max-height: 0px;
     }
 
 }

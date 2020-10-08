@@ -1,3 +1,5 @@
+@import "../../utils.scss";
+
 .jsw-modal {
 
     position: fixed;
@@ -5,7 +7,7 @@
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 105;
+    z-index: 1050;
     opacity: 0;
     pointer-events: none;
     background-color: rgba(0,0,0,0.6);
@@ -23,18 +25,22 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        padding: 22px;
+        padding: 32px;
         width: 80%;
         background-color: rgba(255,255,255,0.85);
         box-shadow: 4px 4px 6px 0 rgba(0,0,0,0.3);
         border-radius: 4px;
+
+        @include desktop {
+            max-width: 684px;
+        }
 
         & > h1 {
             font-size: 20px;
             letter-spacing: 2px;
             font-weight: 200;
             color: rgb(60,60,60);
-            margin: 0 0 12px 0;
+            margin: 0 0 18px 0;
             text-align: center;
         }
 

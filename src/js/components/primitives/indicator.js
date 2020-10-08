@@ -42,3 +42,7 @@ export default class Indicator extends React.Component {
     }
 
 }
+
+export {
+    Indicator
+};

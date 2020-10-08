@@ -3,9 +3,30 @@
     margin: 0 0 12px 0;
     align-items: center;
     position: relative;
+    width: fit-content;
 
     & > label {
-        margin-right: 24px;
+      font-size: 14px;
+      margin-right: 24px;
+      color: var(--themeInputLabel);
+    }
+
+    .jsw-selector-icon {
+      width: 38px;
+      min-width: 38px;
+      height: 38px;
+      min-height: 38px;
+      padding: 4px;
+      margin: 0 4px;
+      overflow: hidden;
+      
+      img {
+        border-radius: 4px;
+        object-position: center;
+        object-fit: contain;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .jsw-selector-main {
@@ -33,7 +54,7 @@
         border-radius: 0 0 4px 4px;
         padding-top: 4px;
 
-        transition: max-height 0.4s ease-in-out, height 0.4s ease-in-out, opacity 0.4s ease-in-out 0.25s;
+        transition: max-height 0.25s ease-in-out, height 0.25s ease-in-out, opacity 0.3s ease-in-out 0.15s;
 
         &::after {
             position: absolute;
@@ -55,6 +76,10 @@
         background-color: white;
 
         transition: box-shadow 0.3s;
+
+        &::placeholder {
+          color: rgb(210,210,210);
+        }
     }
 
     &.open {
@@ -100,21 +125,92 @@
             filter: brightness(85%);
             transition: filter 0.05s ease-in-out;
         }
+
+        .jsw-chevron {
+            width: 14px;
+            height: 14px;
+        }
     }
 
     .jsw-selector-item {
         width: 100%;
         display: flex;
         align-items: center;
-        font-size: 14px;
-        padding: 12px;
-        height: 28px;
+        padding: 2px 4px;
+        min-height: 28px;
         cursor: pointer;
+
+        p {
+          font-size: 14px;
+          margin: 0 4px;
+          display: flex;
+          align-items: center;
+          color: rgb(60,60,60);
+        }
 
         transition: background-color 0.35s ease-in-out;
 
+        .jsw-selector-item-icon {
+          min-width: 26px;
+          min-height: 26px;
+          margin: 2px 8px 2px 2px;
+          border-radius: 4px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            width: 32px;
+            height: 32px;
+            margin: 4px 0;
+            object-fit: contain;
+            object-position: center;
+          }
+
+          svg {
+            font-size: 20px;
+            color: rgb(200,200,200);
+          }
+        }
+
+        .jsw-selector-item-button {
+          position: absolute;
+          right: -102%;
+          height: 26px;
+          padding: 2px;
+          cursor: pointer;
+          opacity: 0;
+          pointer-events: none;
+          user-select: none;
+          display: flex;
+          align-items: center;
+
+          transition: right 0.25s ease-in-out, opacity 0.25s ease-in-out;
+
+          svg {
+            font-size: 18px;
+            color: rgb(80,80,80);
+            transition: filter 0.25s;
+
+            &:hover {
+              filter: brightness(115%);
+            }
+          }
+        }
+
         &:hover {
-            background-color: rgb(200,200,200);
+            background-color: rgb(240,240,240);
+
+            .jsw-selector-item-button {
+              right: 6px;
+              opacity: 1;
+              pointer-events: all;
+              user-select: unset;
+            }
         }
     }
 

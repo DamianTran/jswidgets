@@ -110,3 +110,5 @@ export default class Parallax extends React.Component {
     }
 
 }
+
+export { Parallax };
