@@ -31,6 +31,7 @@ export * from "./js/components/widgets/slider";
 export * from "./js/components/widgets/navigation";
 export * from "./js/components/widgets/splash";
 export * from "./js/components/widgets/modal";
+export * from "./js/components/widgets/list";
 export * from "./js/components/widgets/table";
 export * from "./js/components/widgets/listInput";
 export * from "./js/components/widgets/imageUpload";
